@@ -3859,7 +3859,7 @@ class SubredditWiki:
         .. code-block:: python
 
             subreddit = await reddit.subreddit("iama")
-            async for wikipage in sureddit.wiki:
+            async for wikipage in subreddit.wiki:
                 print(wikipage)
 
         """
