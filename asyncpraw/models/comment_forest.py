@@ -103,7 +103,7 @@ class CommentForest:
             self._comments.append(comment)
         else:
             assert comment.parent_id in self._submission._comments_by_id, (
-                "PRAW Error occurred. Please file a bug report and include "
+                "Async PRAW Error occurred. Please file a bug report and include "
                 "the code that caused the error."
             )
             parent = self._submission._comments_by_id[comment.parent_id]

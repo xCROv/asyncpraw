@@ -1,5 +1,5 @@
 """Provide the Removal Reason class."""
-from typing import TYPE_CHECKING, Any, Dict, AsyncGenerator, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, AsyncIterator, List, Optional, Union
 from warnings import warn
 
 from ...const import API_PATH
@@ -212,7 +212,7 @@ class SubredditRemovalReasons:
         self.subreddit = subreddit
         self._reddit = subreddit._reddit
 
-    async def __aiter__(self) -> AsyncGenerator[RemovalReason, None]:
+    async def __aiter__(self) -> AsyncIterator[RemovalReason]:
         """Return a list of Removal Reasons for the subreddit.
 
         This method is used to discover all removal reasons for a

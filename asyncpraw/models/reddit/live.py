@@ -1,5 +1,5 @@
 """Provide the LiveThread class."""
-from typing import TYPE_CHECKING, Any, Dict, AsyncGenerator, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, AsyncIterator, List, Optional, Union
 
 from ...const import API_PATH
 from ...util.cache import cachedproperty
@@ -28,7 +28,7 @@ class LiveContributorRelationship:
 
     def __call__(
         self,
-    ) -> AsyncGenerator:  # noqa: D202
+    ) -> AsyncIterator:  # noqa: D202
         """Return a :class:`.RedditorList` for live threads' contributors.
 
         Usage:
@@ -410,7 +410,7 @@ class LiveThread(RedditBase):
             self.id = id
 
     def _fetch_info(self):
-        return ("liveabout", {"id": self.id}, None)
+        return "liveabout", {"id": self.id}, None
 
     async def _fetch_data(self):
         name, fields, params = self._fetch_info()
@@ -426,7 +426,7 @@ class LiveThread(RedditBase):
 
     def discussions(
         self, **generator_kwargs: Union[str, int, Dict[str, str]]
-    ) -> AsyncGenerator["Submission", None]:
+    ) -> AsyncIterator["Submission"]:
         """Get submissions linking to the thread.
 
         :param generator_kwargs: keyword arguments passed to
@@ -469,7 +469,7 @@ class LiveThread(RedditBase):
 
     async def updates(
         self, **generator_kwargs: Union[str, int, Dict[str, str]]
-    ) -> AsyncGenerator["LiveUpdate", None]:
+    ) -> AsyncIterator["LiveUpdate"]:
         """Return a :class:`.ListingGenerator` yields :class:`.LiveUpdate` s.
 
         :param generator_kwargs: keyword arguments passed to
@@ -631,7 +631,7 @@ class LiveThreadStream:
 
     def updates(
         self, **stream_options: Dict[str, Any]
-    ) -> AsyncGenerator["LiveUpdate", None]:
+    ) -> AsyncIterator["LiveUpdate"]:
         """Yield new updates to the live thread as they become available.
 
         :param skip_existing: Set to ``True`` to only fetch items created

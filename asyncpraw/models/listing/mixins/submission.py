@@ -1,5 +1,5 @@
 """Provide the SubmissionListingMixin class."""
-from typing import TYPE_CHECKING, Dict, AsyncGenerator, Union
+from typing import TYPE_CHECKING, Dict, AsyncIterator, Union
 
 from ....const import API_PATH
 from ...base import AsyncPRAWBase
@@ -14,7 +14,7 @@ class SubmissionListingMixin(AsyncPRAWBase):
 
     def duplicates(
         self, **generator_kwargs: Union[str, int, Dict[str, str]]
-    ) -> AsyncGenerator["Submission", None]:
+    ) -> AsyncIterator["Submission"]:
         """Return a :class:`.ListingGenerator` for the submission's duplicates.
 
         Additional keyword arguments are passed in the initialization of
