@@ -137,7 +137,7 @@ individual variables, for example:
    bot_name=MyBot
    bot_version=1.2.3
    bot_author=MyUser
-   user_agent=script:%(bot_name)s:v%(bot_version)s (by /u/%(bot_author)s)
+   user_agent=script:%(bot_name)s:v%(bot_version)s (by u/%(bot_author)s)
 
 This uses basic interpolation thus :class:`.Reddit` need to be initialized as
 follows:

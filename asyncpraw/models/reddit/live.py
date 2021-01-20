@@ -80,15 +80,15 @@ class LiveContributorRelationship:
     ):
         """Invite a redditor to be a contributor of the live thread.
 
-        :raises: :class:`asyncpraw.exceptions.APIException` if the invitation
-            already exists.
-
         :param redditor: A redditor name (e.g., ``"spez"``) or
             :class:`~.Redditor` instance.
         :param permissions: When provided (not ``None``), permissions should
             be a list of strings specifying which subset of permissions to
             grant. An empty list ``[]`` indicates no permissions, and when
             not provided (``None``), indicates full permissions.
+
+        :raises: :class:`asyncpraw.exceptions.APIException` if the invitation
+            already exists.
 
         Usage:
 
@@ -165,8 +165,9 @@ class LiveContributorRelationship:
             await thread.contributor.remove_invite(redditor)
             await thread.contributor.remove_invite("t2_1w72")  # with fullname
 
-        :seealso: :meth:`.LiveContributorRelationship.invite` to
-            invite a redditor to be a contributor of the live thread.
+        .. seealso::
+
+             :meth:`.LiveContributorRelationship.invite` to invite a redditor to be a contributor of the live thread.
 
         """
         if isinstance(redditor, Redditor):
@@ -795,11 +796,11 @@ class LiveUpdateContribution:
 
         Usage:
 
-         .. code-block:: python
+        .. code-block:: python
 
-             thread = await reddit.live("ydwwxneu7vsa")
-             update = await thread.get_update("6854605a-efec-11e6-b0c7-0eafac4ff094")
-             await update.contrib.remove()
+            thread = await reddit.live("ydwwxneu7vsa")
+            update = await thread.get_update("6854605a-efec-11e6-b0c7-0eafac4ff094")
+            await update.contrib.remove()
 
         """
         url = API_PATH["live_remove_update"].format(id=self.update.thread.id)

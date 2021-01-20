@@ -73,8 +73,8 @@ class Subreddit(MessageableMixin, SubredditListingMixin, FullnameMixin, RedditBa
 
     Subreddits can be filtered from combined listings as follows. Note that
     these filters are ignored by certain methods, including
-    :attr:`~asyncpraw.models.Subreddit.comments`,
-    :meth:`~asyncpraw.models.Subreddit.gilded`, and
+    :attr:`.comments`,
+    :meth:`.gilded`, and
     :meth:`.SubredditStream.comments`.
 
     .. code-block:: python
@@ -573,8 +573,15 @@ class Subreddit(MessageableMixin, SubredditListingMixin, FullnameMixin, RedditBa
         :param display_name: The name of the subreddit.
 
         .. note:: This class should not be initialized directly. Instead obtain
-           an instance via: ``await reddit.subreddit("subreddit_name")`` or lazily
-           ``await reddit.subreddit("subreddit_name")``
+            an instance via:
+
+            .. code-block:: python
+
+                # to lazily load a subreddit instance
+                await reddit.subreddit("subreddit_name")
+
+                # to fully load a subreddit instance
+                await reddit.subreddit("subreddit_name", fetch=True)
 
         """
         if bool(display_name) == bool(_data):
@@ -861,7 +868,7 @@ class Subreddit(MessageableMixin, SubredditListingMixin, FullnameMixin, RedditBa
         :param number: Specify which sticky to return. 1 appears at the top
             (default: 1).
 
-        Raises ``asyncprawcore.NotFound`` if the sticky does not exist.
+        :raises: ``asyncprawcore.NotFound`` if the sticky does not exist.
 
         For example, to get the stickied post on the subreddit ``r/test``:
 
@@ -1443,9 +1450,9 @@ class Subreddit(MessageableMixin, SubredditListingMixin, FullnameMixin, RedditBa
     async def traffic(self):
         """Return a dictionary of the subreddit's traffic statistics.
 
-        Raises ``asyncprawcore.NotFound`` when the traffic stats aren't
-        available to the authenticated user, that is, they are not public and
-        the authenticated user is not a moderator of the subreddit.
+        :raises: ``asyncprawcore.NotFound`` when the traffic stats aren't
+            available to the authenticated user, that is, they are not public and
+            the authenticated user is not a moderator of the subreddit.
 
         The traffic method returns a dict with three keys. The keys are
         ``day``, ``hour`` and ``month``. Each key contains a list of lists with
@@ -1552,7 +1559,7 @@ class SubredditFilters:
 
             await reddit.subreddit("all-redditdev-learnpython")
 
-        Raises ``asyncprawcore.NotFound`` when calling on a non-special
+        :raises: ``asyncprawcore.NotFound`` when calling on a non-special
             subreddit.
 
         """
@@ -1571,7 +1578,7 @@ class SubredditFilters:
 
         :param subreddit: The subreddit to remove from the filter list.
 
-        Raises ``asyncprawcore.NotFound`` when calling on a non-special
+        :raises: ``asyncprawcore.NotFound`` when calling on a non-special
             subreddit.
 
         """
@@ -3639,13 +3646,13 @@ class SubredditStylesheet:
         :returns: A dictionary containing a link to the uploaded image under
             the key ``img_src``.
 
-        Raises ``asyncprawcore.TooLarge`` if the overall request body is too
+        :raises: ``asyncprawcore.TooLarge`` if the overall request body is too
             large.
 
-        Raises :class:`.RedditAPIException` if there are other issues with the
-        uploaded image. Unfortunately the exception info might not be very
-        specific, so try through the website with the same image to see what
-        the problem actually might be.
+        :raises: :class:`.RedditAPIException` if there are other issues with the
+            uploaded image. Unfortunately the exception info might not be very
+            specific, so try through the website with the same image to see what
+            the problem actually might be.
 
         For example:
 
@@ -3664,12 +3671,12 @@ class SubredditStylesheet:
 
         :param image_path: A path to a jpeg or png image.
 
-        Raises ``asyncprawcore.TooLarge`` if the overall request body is too large.
+        :raises: ``asyncprawcore.TooLarge`` if the overall request body is too large.
 
-        Raises :class:`.RedditAPIException` if there are other issues with the
-        uploaded image. Unfortunately the exception info might not be very
-        specific, so try through the website with the same image to see what
-        the problem actually might be.
+        :raises: :class:`.RedditAPIException` if there are other issues with the
+            uploaded image. Unfortunately the exception info might not be very
+            specific, so try through the website with the same image to see what
+            the problem actually might be.
 
         For example:
 
@@ -3690,12 +3697,12 @@ class SubredditStylesheet:
         :param align: Either ``left``, ``centered``, or ``right``. (default:
             ``left``).
 
-        Raises ``asyncprawcore.TooLarge`` if the overall request body is too large.
+        :raises: ``asyncprawcore.TooLarge`` if the overall request body is too large.
 
-        Raises :class:`.RedditAPIException` if there are other issues with the
-        uploaded image. Unfortunately the exception info might not be very
-        specific, so try through the website with the same image to see what
-        the problem actually might be.
+        :raises: :class:`.RedditAPIException` if there are other issues with the
+            uploaded image. Unfortunately the exception info might not be very
+            specific, so try through the website with the same image to see what
+            the problem actually might be.
 
         For example:
 
@@ -3727,12 +3734,12 @@ class SubredditStylesheet:
 
         Fails if the Subreddit does not have an additional image defined
 
-        Raises ``asyncprawcore.TooLarge`` if the overall request body is too large.
+        :raises: ``asyncprawcore.TooLarge`` if the overall request body is too large.
 
-        Raises :class:`.RedditAPIException` if there are other issues with the
-        uploaded image. Unfortunately the exception info might not be very
-        specific, so try through the website with the same image to see what
-        the problem actually might be.
+        :raises: :class:`.RedditAPIException` if there are other issues with the
+            uploaded image. Unfortunately the exception info might not be very
+            specific, so try through the website with the same image to see what
+            the problem actually might be.
 
         For example:
 
@@ -3753,12 +3760,12 @@ class SubredditStylesheet:
         :returns: A dictionary containing a link to the uploaded image under
             the key ``img_src``.
 
-        Raises ``asyncprawcore.TooLarge`` if the overall request body is too large.
+        :raises: ``asyncprawcore.TooLarge`` if the overall request body is too large.
 
-        Raises :class:`.RedditAPIException` if there are other issues with the
-        uploaded image. Unfortunately the exception info might not be very
-        specific, so try through the website with the same image to see what
-        the problem actually might be.
+        :raises: :class:`.RedditAPIException` if there are other issues with the
+            uploaded image. Unfortunately the exception info might not be very
+            specific, so try through the website with the same image to see what
+            the problem actually might be.
 
         For example:
 
@@ -3777,12 +3784,12 @@ class SubredditStylesheet:
         :returns: A dictionary containing a link to the uploaded image under
             the key ``img_src``.
 
-        Raises ``asyncprawcore.TooLarge`` if the overall request body is too large.
+        :raises: ``asyncprawcore.TooLarge`` if the overall request body is too large.
 
-        Raises :class:`.RedditAPIException` if there are other issues with the
-        uploaded image. Unfortunately the exception info might not be very
-        specific, so try through the website with the same image to see what
-        the problem actually might be.
+        :raises: :class:`.RedditAPIException` if there are other issues with the
+            uploaded image. Unfortunately the exception info might not be very
+            specific, so try through the website with the same image to see what
+            the problem actually might be.
 
         For example:
 
@@ -3801,12 +3808,12 @@ class SubredditStylesheet:
         :returns: A dictionary containing a link to the uploaded image under
             the key ``img_src``.
 
-        Raises ``asyncprawcore.TooLarge`` if the overall request body is too large.
+        :raises: ``asyncprawcore.TooLarge`` if the overall request body is too large.
 
-        Raises :class:`.RedditAPIException` if there are other issues with the
-        uploaded image. Unfortunately the exception info might not be very
-        specific, so try through the website with the same image to see what
-        the problem actually might be.
+        :raises: :class:`.RedditAPIException` if there are other issues with the
+            uploaded image. Unfortunately the exception info might not be very
+            specific, so try through the website with the same image to see what
+            the problem actually might be.
 
         For example:
 

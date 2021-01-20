@@ -74,7 +74,7 @@ class Reddit:
         """Set or unset the use of the ReadOnlyAuthorizer.
 
         :raises: :class:`ClientException` when attempting to unset ``read_only``
-        and only the ReadOnlyAuthorizer is available.
+            and only the ReadOnlyAuthorizer is available.
 
         """
         if value:
@@ -92,6 +92,7 @@ class Reddit:
         """Get validate_on_submit.
 
         .. deprecated:: 7.0
+
             If property :attr:`.validate_on_submit` is set to False, the
             behavior is deprecated by Reddit. This attribute will be removed
             around May-June 2020.
@@ -272,7 +273,11 @@ class Reddit:
         """An instance of :class:`.Auth`.
 
         Provides the interface for interacting with installed and web
-        applications. See :ref:`auth_url`
+        applications. 
+        
+        .. seealso::
+             
+             :ref:`auth_url`
 
         """
 

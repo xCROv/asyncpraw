@@ -250,7 +250,9 @@ class SubredditHelper(AsyncPRAWBase):
         Any keyword parameters not provided, or set explicitly to None, will
         take on a default value assigned by the Reddit server.
 
-        .. seealso:: :meth:`~.SubredditModeration.update` for documentation
+        .. seealso::
+
+            :meth:`~.SubredditModeration.update` for documentation
             of other available settings.
 
         """

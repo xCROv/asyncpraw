@@ -1,5 +1,5 @@
-Maintainers
-===========
+Author/Maintainer
+=================
 
 - Joel Payne <lilspazjoekp@gmail.com> `@LilSpazJoekp <https://github.com/lilspazjoekp>`_
 
@@ -69,4 +69,5 @@ Source Contributors
 - MaybeNetwork `@MaybeNetwork <https://github.com/MaybeNetwork>`_
 - Nick Kelly `@nickatnight <https://github.com/nickatnight>`_
 - Gerard Rodes <GerardRodesVidal@gmail.com> `@GerardRodes <https://github.com/GerardRodes>`_
+
 <!-- - Add "Name <email (optional)> and github profile link" above this line. -->
