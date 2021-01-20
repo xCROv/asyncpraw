@@ -18,6 +18,7 @@ extras = {
     "dev": ["pre-commit"],
     "lint": [
         "black",
+        "docstrfmt",
         "flake8",
         "pydocstyle",
         "sphinx<3.0",
