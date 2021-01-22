@@ -81,8 +81,7 @@ class Reddit:
             self._core = self._read_only_core
         elif self._authorized_core is None:
             raise ClientException(
-                "read_only cannot be unset as only the "
-                "ReadOnlyAuthorizer is available."
+                "read_only cannot be unset as only the ReadOnlyAuthorizer is available."
             )
         else:
             self._core = self._authorized_core
@@ -101,9 +100,9 @@ class Reddit:
         value = self._validate_on_submit
         if value is False:
             warn(
-                "Reddit will check for validation on all posts around "
-                "May-June 2020. It is recommended to check for validation"
-                " by setting reddit.validate_on_submit to True.",
+                "Reddit will check for validation on all posts around May-June 2020. It"
+                " is recommended to check for validation by setting"
+                " reddit.validate_on_submit to True.",
                 category=DeprecationWarning,
                 stacklevel=3,
             )
@@ -132,9 +131,9 @@ class Reddit:
 
         """
         warn(
-            "Using this class as a synchronous context manager is deprecated and will "
-            "be removed in the next release. Use this class as an asynchronous context "
-            "manager instead.",
+            "Using this class as a synchronous context manager is deprecated and will"
+            " be removed in the next release. Use this class as an asynchronous context"
+            " manager instead.",
             category=DeprecationWarning,
             stacklevel=3,
         )
@@ -234,24 +233,20 @@ class Reddit:
             )
         except configparser.NoSectionError as exc:
             help_message = (
-                "You provided the name of a praw.ini "
-                "configuration which does not exist.\n\nFor help "
-                "with creating a Reddit instance, visit\n"
-                "https://asyncpraw.readthedocs.io/en/latest/code_overvi"
-                "ew/reddit_instance.html\n\n"
-                "For help on configuring Async PRAW, visit\n"
-                "https://asyncpraw.readthedocs.io/en/latest/getting_sta"
-                "rted/configuration.html"
+                "You provided the name of a praw.ini configuration which does not"
+                " exist.\n\nFor help with creating a Reddit instance,"
+                " visit\nhttps://asyncpraw.readthedocs.io/en/latest/code_overview/reddit_instance.html\n\nFor"
+                " help on configuring Async PRAW,"
+                " visit\nhttps://asyncpraw.readthedocs.io/en/latest/getting_started/configuration.html"
             )
             if site_name is not None:
                 exc.message += f"\n{help_message}"
             raise
 
         required_message = (
-            "Required configuration setting {!r} missing. \n"
-            "This setting can be provided in a praw.ini file, "
-            "as a keyword argument to the `Reddit` class "
-            "constructor, or as an environment variable."
+            "Required configuration setting {!r} missing. \nThis setting can be"
+            " provided in a praw.ini file, as a keyword argument to the `Reddit` class"
+            " constructor, or as an environment variable."
         )
         for attribute in ("client_id", "user_agent"):
             if getattr(self.config, attribute) in (self.config.CONFIG_NOT_SET, None):
@@ -260,7 +255,9 @@ class Reddit:
                 )
         if self.config.client_secret is self.config.CONFIG_NOT_SET:
             raise MissingRequiredAttributeException(
-                f"{required_message.format('client_secret')}\nFor installed applications this value must be set to None via a keyword argument to the `Reddit` class constructor."
+                f"{required_message.format('client_secret')}\nFor installed"
+                " applications this value must be set to None via a keyword argument"
+                " to the `Reddit` class constructor."
             )
 
         self._prepare_objector()
@@ -856,8 +853,8 @@ class Reddit:
                 # TODO: Remove this exception after 2020-12-31 if no one has
                 # filed a bug against it.
                 raise Exception(
-                    "Unexpected BadRequest without json body. Please file a "
-                    "bug at https://github.com/praw-dev/asyncpraw/issues"
+                    "Unexpected BadRequest without json body. Please file a bug at"
+                    " https://github.com/praw-dev/asyncpraw/issues"
                 ) from exception
             if set(data) == {"error", "message"}:
                 raise
