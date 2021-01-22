@@ -58,7 +58,7 @@ setup(
         "Topic :: Utilities",
     ],
     description=(
-        "Async PRAW, an acronym for `Asynchronous Python Reddit API Wrapper`, is a"
+        "Async PRAW, an abbreviation for `Asynchronous Python Reddit API Wrapper`, is a"
         " python package that allows for simple access to reddit's API."
     ),
     extras_require=extras,
