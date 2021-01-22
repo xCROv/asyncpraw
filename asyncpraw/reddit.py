@@ -244,7 +244,7 @@ class Reddit:
                 "rted/configuration.html"
             )
             if site_name is not None:
-                exc.message += "\n" + help_message
+                exc.message += f"\n{help_message}"
             raise
 
         required_message = (
@@ -260,10 +260,7 @@ class Reddit:
                 )
         if self.config.client_secret is self.config.CONFIG_NOT_SET:
             raise MissingRequiredAttributeException(
-                required_message.format("client_secret")
-                + "\nFor installed applications this value "
-                "must be set to None via a keyword argument "
-                "to the `Reddit` class constructor."
+                f"{required_message.format('client_secret')}\nFor installed applications this value must be set to None via a keyword argument to the `Reddit` class constructor."
             )
 
         self._prepare_objector()

@@ -983,7 +983,7 @@ class SubredditWidgetsModeration:
             )
         response.raise_for_status()
 
-        return upload_url + "/" + upload_data["key"]
+        return f"{upload_url}/{upload_data['key']}"
 
 
 class Widget(AsyncPRAWBase):
