@@ -29,34 +29,33 @@ class Collection(RedditBase):
 
         subreddit = await reddit.subreddit("SUBREDDIT")
         collection = await subreddit.collections(
-            permalink="https://reddit.com/r/SUBREDDIT/collection/some_uuid")
+            permalink="https://reddit.com/r/SUBREDDIT/collection/some_uuid"
+        )
 
     **Typical Attributes**
 
-    This table describes attributes that typically belong to objects of this
-    class. Since attributes are dynamically provided (see
-    :ref:`determine-available-attributes-of-an-object`), there is not a
-    guarantee that these attributes will always be present, nor that they
-    will be the only attributes present.
+    This table describes attributes that typically belong to objects of this class.
+    Since attributes are dynamically provided (see
+    :ref:`determine-available-attributes-of-an-object`), there is not a guarantee that
+    these attributes will always be present, nor that they will be the only attributes
+    present.
 
-    ======================= ==================================================
-    Attribute               Description
-    ======================= ==================================================
-    ``author``              The :class:`.Redditor` who created the collection.
-    ``collection_id``       The UUID of the collection.
-    ``created_at_utc``      Time the collection was created, represented in
-                            `Unix Time`_.
-    ``description``         The collection description.
-    ``last_update_utc``     Time the collection was last updated, represented
-                            in `Unix Time`_.
-    ``link_ids``            A ``list`` of :class:`.Submission` fullnames.
-    ``permalink``           The collection's permalink (to view on the web).
-    ``sorted_links``        An iterable listing of the posts in
-                            this collection.
-    ``title``               The title of the collection.
-    ======================= ==================================================
+    =================== =============================================================
+    Attribute           Description
+    =================== =============================================================
+    ``author``          The :class:`.Redditor` who created the collection.
+    ``collection_id``   The UUID of the collection.
+    ``created_at_utc``  Time the collection was created, represented in `Unix Time`_.
+    ``description``     The collection description.
+    ``last_update_utc`` Time the collection was last updated, represented in `Unix
+                        Time`_.
+    ``link_ids``        A ``list`` of :class:`.Submission` fullnames.
+    ``permalink``       The collection's permalink (to view on the web).
+    ``sorted_links``    An iterable listing of the posts in this collection.
+    ``title``           The title of the collection.
+    =================== =============================================================
 
-    .. _Unix Time: https://en.wikipedia.org/wiki/Unix_time
+    .. _unix time: https://en.wikipedia.org/wiki/Unix_time
 
     """
 
@@ -69,8 +68,8 @@ class Collection(RedditBase):
         Provides access to various methods, including
         :meth:`~reddit.collections.CollectionModeration.add_post`,
         :meth:`~reddit.collections.CollectionModeration.delete`,
-        :meth:`~reddit.collections.CollectionModeration.reorder`,
-        and :meth:`~reddit.collections.CollectionModeration.update_title`.
+        :meth:`~reddit.collections.CollectionModeration.reorder`, and
+        :meth:`~reddit.collections.CollectionModeration.update_title`.
 
         Example usage:
 
@@ -111,6 +110,7 @@ class Collection(RedditBase):
         :param _data: Any data associated with the Collection (optional).
         :param collection_id: The ID of the Collection (optional).
         :param permalink: The permalink of the Collection (optional).
+
         """
         super().__init__(reddit, _data)
 
@@ -206,7 +206,10 @@ class Collection(RedditBase):
             collection = await subreddit.collections("some_uuid")
             await collection.follow()
 
-        .. seealso:: :meth:`~.unfollow`
+        .. seealso::
+
+            :meth:`~.unfollow`
+
         """
         await self._reddit.post(
             API_PATH["collection_follow"],
@@ -224,7 +227,10 @@ class Collection(RedditBase):
             collection = await subreddit.collections("some_uuid")
             await collection.unfollow()
 
-        .. seealso:: :meth:`~.follow`
+        .. seealso::
+
+            :meth:`~.follow`
+
         """
         await self._reddit.post(
             API_PATH["collection_follow"],
@@ -242,13 +248,16 @@ class CollectionModeration(AsyncPRAWBase):
         subreddit = await reddit.subreddit("SUBREDDIT")
         collection = await subreddit.collections("some_uuid")
         collection.mod
+
     """
 
     def _post_fullname(self, post):
         """Get a post's fullname.
 
         :param post: A fullname, a Submission, a permalink, or an ID.
+
         :returns: The fullname of the post.
+
         """
         if isinstance(post, Submission):
             return post.fullname
@@ -265,6 +274,7 @@ class CollectionModeration(AsyncPRAWBase):
         """Initialize an instance of CollectionModeration.
 
         :param collection_id: The ID of a collection.
+
         """
         super().__init__(reddit, _data=None)
         self.collection_id = collection_id
@@ -272,9 +282,8 @@ class CollectionModeration(AsyncPRAWBase):
     async def add_post(self, submission: "Submission"):
         """Add a post to the collection.
 
-        :param submission: The post to add, a :class:`.Submission`, its
-            permalink as a ``str``, its fullname as a ``str``, or its ID as a
-            ``str``.
+        :param submission: The post to add, a :class:`.Submission`, its permalink as a
+            ``str``, its fullname as a ``str``, or its ID as a ``str``.
 
         Example usage:
 
@@ -284,7 +293,9 @@ class CollectionModeration(AsyncPRAWBase):
             collection = await subreddit.collections("some_uuid")
             await collection.mod.add_post("bgibu9")
 
-        .. seealso:: :meth:`.remove_post`
+        .. seealso::
+
+            :meth:`.remove_post`
 
         """
         link_fullname = self._post_fullname(submission)
@@ -305,7 +316,9 @@ class CollectionModeration(AsyncPRAWBase):
             collection = await subreddit.collections("some_uuid")
             await collection.mod.delete()
 
-        .. seealso:: :meth:`~.SubredditCollectionsModeration.create`
+        .. seealso::
+
+            :meth:`~.SubredditCollectionsModeration.create`
 
         """
         await self._reddit.post(
@@ -316,9 +329,8 @@ class CollectionModeration(AsyncPRAWBase):
     async def remove_post(self, submission: Submission):
         """Remove a post from the collection.
 
-        :param submission: The post to remove, a :class:`.Submission`, its
-            permalink as a ``str``, its fullname as a ``str``, or its ID as a
-            ``str``.
+        :param submission: The post to remove, a :class:`.Submission`, its permalink as
+            a ``str``, its fullname as a ``str``, or its ID as a ``str``.
 
         Example usage:
 
@@ -328,7 +340,9 @@ class CollectionModeration(AsyncPRAWBase):
             collection = await subreddit.collections("some_uuid")
             await collection.mod.remove_post("bgibu9")
 
-        .. seealso:: :meth:`.add_post`
+        .. seealso::
+
+            :meth:`.add_post`
 
         """
         link_fullname = self._post_fullname(submission)
@@ -341,8 +355,8 @@ class CollectionModeration(AsyncPRAWBase):
     async def reorder(self, links: List[Union[str, Submission]]):
         """Reorder posts in the collection.
 
-        :param links: A ``list`` of submissions, as :class:`.Submission`,
-            permalink as a ``str``, fullname as a ``str``, or ID as a ``str``.
+        :param links: A ``list`` of submissions, as :class:`.Submission`, permalink as a
+            ``str``, fullname as a ``str``, or ID as a ``str``.
 
         Example usage:
 
@@ -374,7 +388,9 @@ class CollectionModeration(AsyncPRAWBase):
             collection = await subreddit.collections("some_uuid")
             await collection.mod.update_description("Please enjoy these links")
 
-        .. seealso:: :meth:`.update_title`
+        .. seealso::
+
+            :meth:`.update_title`
 
         """
         await self._reddit.post(
@@ -395,7 +411,9 @@ class CollectionModeration(AsyncPRAWBase):
             collection = await subreddit.collections("some_uuid")
             await collection.mod.update_title("Titley McTitleface")
 
-        .. seealso:: :meth:`.update_description`
+        .. seealso::
+
+            :meth:`.update_description`
 
         """
         await self._reddit.post(
@@ -441,6 +459,7 @@ class SubredditCollections(AsyncPRAWBase):
         :param collection_id: The ID of a Collection (default: None).
         :param permalink: The permalink of a Collection (default: None).
         :param lazy: If True, object is loaded lazily (default: False)
+
         :returns: The specified Collection.
 
         Exactly one of ``collection_id`` and ``permalink`` is required.
@@ -461,8 +480,8 @@ class SubredditCollections(AsyncPRAWBase):
             print(collection.title)
             print(collection.description)
 
-        If you don't need the object fetched right away (e.g., to utilize a
-        class method) you can do:
+        If you don't need the object fetched right away (e.g., to utilize a class
+        method) you can do:
 
         .. code-block:: python
 
@@ -539,8 +558,8 @@ class SubredditCollectionsModeration(AsyncPRAWBase):
     async def create(self, title: str, description: str):
         """Create a new :class:`.Collection`.
 
-        The authenticated account must have appropriate moderator
-        permissions in the subreddit this collection belongs to.
+        The authenticated account must have appropriate moderator permissions in the
+        subreddit this collection belongs to.
 
         :param title: The title of the collection, up to 300 characters.
         :param description: The description, up to 500 characters.
@@ -555,7 +574,9 @@ class SubredditCollectionsModeration(AsyncPRAWBase):
             new_collection = await sub.collections.mod.create("Title", "desc")
             await new_collection.mod.add_post("bgibu9")
 
-        .. seealso:: :meth:`~CollectionModeration.delete`
+        .. seealso::
+
+            :meth:`~CollectionModeration.delete`
 
         """
         if not self.subreddit._fetched:

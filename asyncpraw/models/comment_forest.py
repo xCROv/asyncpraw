@@ -45,8 +45,8 @@ class CommentForest:
             comments = await submission.comments()
             first_comment = comments[0]
 
-        Alternatively, the presence of this method enables one to iterate over
-        all top_level comments, like so:
+        Alternatively, the presence of this method enables one to iterate over all
+        top_level comments, like so:
 
         .. code-block:: python
 
@@ -79,10 +79,9 @@ class CommentForest:
     ):
         """Initialize a CommentForest instance.
 
-        :param submission: An instance of :class:`~.Subreddit` that is the
-            parent of the comments.
-        :param comments: Initialize the Forest with a list of comments
-            (default: None).
+        :param submission: An instance of :class:`~.Subreddit` that is the parent of the
+            comments.
+        :param comments: Initialize the Forest with a list of comments (default: None).
 
         """
         self._comments = comments
@@ -117,8 +116,8 @@ class CommentForest:
     async def list(self) -> List[Union["Comment", "MoreComments"]]:
         """Return a flattened list of all Comments.
 
-        This list may contain :class:`.MoreComments` instances if
-        :meth:`.replace_more` was not called first.
+        This list may contain :class:`.MoreComments` instances if :meth:`.replace_more`
+        was not called first.
 
         """
         comments = []
@@ -135,18 +134,16 @@ class CommentForest:
     ) -> List[MoreComments]:
         """Update the comment forest by resolving instances of MoreComments.
 
-        :param limit: The maximum number of :class:`.MoreComments` instances to
-            replace. Each replacement requires 1 API request. Set to ``None``
-            to have no limit, or to ``0`` to remove all :class:`.MoreComments`
-            instances without additional requests (default: 32).
+        :param limit: The maximum number of :class:`.MoreComments` instances to replace.
+            Each replacement requires 1 API request. Set to ``None`` to have no limit,
+            or to ``0`` to remove all :class:`.MoreComments` instances without
+            additional requests (default: 32).
         :param threshold: The minimum number of children comments a
-            :class:`.MoreComments` instance must have in order to be
-            replaced. :class:`.MoreComments` instances that represent "continue
-            this thread" links unfortunately appear to have 0
-            children. (default: 0).
+            :class:`.MoreComments` instance must have in order to be replaced.
+            :class:`.MoreComments` instances that represent "continue this thread" links
+            unfortunately appear to have 0 children. (default: 0).
 
-        :returns: A list of :class:`.MoreComments` instances that were not
-            replaced.
+        :returns: A list of :class:`.MoreComments` instances that were not replaced.
 
         For example, to replace up to 32 :class:`.MoreComments` instances of a
         submission try:
@@ -157,34 +154,36 @@ class CommentForest:
             comments = await submission.comments()
             await comments.replace_more()
 
-        Alternatively, to replace :class:`.MoreComments` instances within the
-        replies of a single comment try:
+        Alternatively, to replace :class:`.MoreComments` instances within the replies of
+        a single comment try:
 
         .. code-block:: python
 
             comment = await reddit.comment("d8r4im1")
             await comment.replies.replace_more()
 
-        .. note:: This method can take a long time as each replacement will
-                  discover at most 20 new :class:`.Comment` or
-                  :class:`.MoreComments` instances. As a result, consider
-                  looping and handling exceptions until the method returns
-                  successfully. For example:
+        .. note::
 
-                  .. code-block:: python
+            This method can take a long time as each replacement will discover at most
+            20 new :class:`.Comment` or :class:`.MoreComments` instances. As a result,
+            consider looping and handling exceptions until the method returns
+            successfully. For example:
 
-                      while True:
-                          try:
-                              comments = await submission.comments()
-                              await comments.replace_more()
-                              break
-                          except PossibleExceptions:
-                              print("Handling replace_more exception")
-                              await asyncio.sleep(1)
+            .. code-block:: python
 
-        .. warning:: If this method is called, and the comments are refreshed,
-            calling this method again will result in a
-            :class:`.DuplicateReplaceException`.
+                while True:
+                    try:
+                        comments = await submission.comments()
+                        await comments.replace_more()
+                        break
+                    except PossibleExceptions:
+                        print("Handling replace_more exception")
+                        await asyncio.sleep(1)
+
+        .. warning::
+
+            If this method is called, and the comments are refreshed, calling this
+            method again will result in a :class:`.DuplicateReplaceException`.
 
         """
         remaining = limit

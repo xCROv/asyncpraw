@@ -21,14 +21,14 @@ class Objector:
         """Convert JSON response into an error object.
 
         :param data: The dict to be converted.
-        :returns: An instance of :class:`~.RedditAPIException`, or ``None`` if
-            ``data`` doesn't fit this model.
+
+        :returns: An instance of :class:`~.RedditAPIException`, or ``None`` if ``data``
+            doesn't fit this model.
 
         """
         if isinstance(data, list):
-            # Fetching a Submission returns a list (of two items).
-            # Although it's handled manually in `Submission._fetch()`,
-            # assume it's a possibility here.
+            # Fetching a Submission returns a list (of two items). Although it's handled
+            # manually in `Submission._fetch()`, assume it's a possibility here.
             return None
 
         errors = data.get("json", {}).get("errors")
@@ -59,6 +59,7 @@ class Objector:
         """Create RedditBase objects from dicts.
 
         :param data: The structured data, assumed to be a dict.
+
         :returns: An instance of :class:`~.RedditBase`.
 
         """
@@ -145,8 +146,9 @@ class Objector:
         """Create RedditBase objects from data.
 
         :param data: The structured data.
-        :returns: An instance of :class:`~.RedditBase`, or ``None`` if
-            given ``data`` is ``None``.
+
+        :returns: An instance of :class:`~.RedditBase`, or ``None`` if given ``data`` is
+            ``None``.
 
         """
         # pylint: disable=too-many-return-statements
@@ -181,9 +183,8 @@ class Objector:
                 if data["json"]["data"]["id"].startswith(
                     f"{self._reddit.config.kinds['submission']}_"
                 ):
-                    # With polls, Reddit returns a fullname but calls it an
-                    # "id". This fixes this by coercing the fullname into an
-                    # id.
+                    # With polls, Reddit returns a fullname but calls it an "id". This
+                    # fixes this by coercing the fullname into an id.
                     data["json"]["data"]["id"] = data["json"]["data"]["id"].split(
                         "_", 1
                     )[1]

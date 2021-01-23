@@ -1,9 +1,8 @@
 """PRAW exception classes.
 
-Includes two main exceptions: :class:`.RedditAPIException` for when something
-goes wrong on the server side, and :class:`.ClientException` when something
-goes wrong on the client side. Both of these classes extend
-:class:`.PRAWException`.
+Includes two main exceptions: :class:`.RedditAPIException` for when something goes wrong
+on the server side, and :class:`.ClientException` when something goes wrong on the
+client side. Both of these classes extend :class:`.PRAWException`.
 
 All other exceptions are subclassed from :class:`.ClientException`.
 
@@ -33,6 +32,7 @@ class RedditErrorItem:
         :param error_type: The error type set on Reddit's end.
         :param message: The associated message for the error.
         :param field: The input field associated with the error, if available.
+
         """
         self.error_type = error_type
         self.message = message
@@ -67,6 +67,7 @@ class APIException(PRAWException):
 
         Class :class:`.APIException` has been deprecated in favor of
         :class:`.RedditAPIException`. This class will be removed in Async PRAW 8.0.
+
     """
 
     @staticmethod
@@ -89,11 +90,10 @@ class APIException(PRAWException):
 
         .. deprecated:: 7.0
 
-            Accessing attributes through instances of
-            :class:`.RedditAPIException` is deprecated. This behavior will be
-            removed in Async PRAW 8.0. Check out the
-            :ref:`PRAW 7 Migration tutorial <Exception_Handling>` on how to
-            migrate code from this behavior.
+            Accessing attributes through instances of :class:`.RedditAPIException` is
+            deprecated. This behavior will be removed in Async PRAW 8.0. Check out the
+            :ref:`PRAW 7 Migration tutorial <Exception_Handling>` on how to migrate code
+            from this behavior.
 
         """
         return self._get_old_attr("error_type")
@@ -104,11 +104,10 @@ class APIException(PRAWException):
 
         .. deprecated:: 7.0
 
-            Accessing attributes through instances of
-            :class:`.RedditAPIException` is deprecated. This behavior will be
-            removed in Async PRAW 8.0. Check out the
-            :ref:`PRAW 7 Migration tutorial <Exception_Handling>` on how to
-            migrate code from this behavior.
+            Accessing attributes through instances of :class:`.RedditAPIException` is
+            deprecated. This behavior will be removed in Async PRAW 8.0. Check out the
+            :ref:`PRAW 7 Migration tutorial <Exception_Handling>` on how to migrate code
+            from this behavior.
 
         """
         return self._get_old_attr("message")
@@ -119,11 +118,10 @@ class APIException(PRAWException):
 
         .. deprecated:: 7.0
 
-            Accessing attributes through instances of
-            :class:`.RedditAPIException` is deprecated. This behavior will be
-            removed in Async PRAW 8.0. Check out the
-            :ref:`PRAW 7 Migration tutorial <Exception_Handling>` on how to
-            migrate code from this behavior.
+            Accessing attributes through instances of :class:`.RedditAPIException` is
+            deprecated. This behavior will be removed in Async PRAW 8.0. Check out the
+            :ref:`PRAW 7 Migration tutorial <Exception_Handling>` on how to migrate code
+            from this behavior.
 
         """
         return self._get_old_attr("field")
@@ -146,10 +144,11 @@ class APIException(PRAWException):
     ):
         """Initialize an instance of RedditAPIException.
 
-        :param items: Either a list of instances of :class:`.RedditErrorItem`
-            or a list containing lists of unformed errors.
+        :param items: Either a list of instances of :class:`.RedditErrorItem` or a list
+            containing lists of unformed errors.
         :param optional_args: Takes the second and third arguments that
             :class:`.APIException` used to take.
+
         """
         if isinstance(items, str):
             items = [[items, *optional_args]]
@@ -204,8 +203,9 @@ class InvalidURL(ClientException):
         """Initialize the class.
 
         :param url: The invalid URL.
-        :param message: The message to display. Must contain a format
-            identifier (``{}`` or ``{0}``). (default: ``"Invalid URL: {}"``)
+        :param message: The message to display. Must contain a format identifier (``{}``
+            or ``{0}``). (default: ``"Invalid URL: {}"``)
+
         """
         super().__init__(message.format(url))
 
@@ -222,6 +222,7 @@ class TooLargeMediaException(ClientException):
 
         :param maximum_size: The maximum_size size of the uploaded media.
         :param actual: The actual size of the uploaded media.
+
         """
         self.maximum_size = maximum_size
         self.actual = actual
@@ -260,8 +261,10 @@ class WebSocketException(ClientException):
         :param message: The exception message.
         :param exception: The exception thrown by the websocket library.
 
-            .. note:: This parameter is deprecated. It will be removed in Async PRAW
-                8.0.
+            .. note::
+
+                This parameter is deprecated. It will be removed in Async PRAW 8.0.
+
         """
         super().__init__(message)
         self._original_exception = exception
